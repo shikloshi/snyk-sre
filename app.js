@@ -6,7 +6,7 @@ const { Client } = require('@elastic/elasticsearch');
 const stackTraceParser = require('stacktrace-parser');
 
 // configuration
-const elastic_endpoint = process.env.ELASTIC_ENDPOINT || "http://localhost:9200";
+const elastic_endpoint = process.env.ELASTIC_ENDPOINT || "http://elasticsearch:9200";
 const elastic_metrics_index = process.env.ELASTIC_METRIC_INDEX || "event-loop-metrics";
 const port = process.env.PORT || 3001;
 

@@ -22,6 +22,11 @@ services:
             - "3001:3001"
         networks:
             - elastic
+        depends_on:
+            - elastic
+        deploy:
+            restart_policy:
+                condition: on-failure
 
 
 networks:
