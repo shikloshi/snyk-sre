@@ -10,24 +10,6 @@ const elastic_endpoint = process.env.ELASTIC_ENDPOINT || "http://localhost:9200"
 const elastic_metrics_index = process.env.ELASTIC_METRIC_INDEX || "event-loop-metrics";
 const port = process.env.PORT || 3001;
 
-// helper for parsing the stack
-//function parseStack(stack) {
-	//const topFrame = stack.split('\n')[0];
-	//const parts = topFrame.trim(" ").split(" ");
-	//const files = parts[2].split("/");
-	//const userCode = !files.includes("node_modules");
-	//const jsFileDescription = files[files.length - 1];
-	//const [ fileName, lineNumber, column ] = jsFileDescription.split(":");
-	//return {
-		//locator: 
-		//fileName,
-		//lineNumber,
-		//column,
-		//functionName: parts[1], 
-		//userCode,
-	//}
-//}
-
 const client = new Client({ node: elastic_endpoint });
 const app = express();
 app.use(bodyParser.json());
@@ -65,8 +47,6 @@ app.post('/eventloop', async (req, res) => {
 	const { stack, blockedFor, event } = stats;
 	const stackFrames = stackTraceParser.parse(stack);
 	const topFrame = stackFrames[0];
-	console.log(topFrame);
-	//const {lineNumber, userCode, fileName, functionName, column } = parseStack(stack);
 	const { hostname, app, appVersion, } = stats.agents[0].info;
 	const { file, methodName, lineNumber, column } = topFrame;
 
