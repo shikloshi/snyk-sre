@@ -1,0 +1,28 @@
+version : '3.7'
+
+services:
+    elastic:
+        image: 'docker.elastic.co/elasticsearch/elasticsearch:7.3.1'
+        networks:
+            elastic:
+                aliases:
+                    - "elasticsearch"
+        environment:
+            - "discovery.type=single-node"
+            - "node.name=elasticsearch"
+    kibana:
+        image: 'docker.elastic.co/kibana/kibana:7.3.1'
+        ports:
+            - "5601:5601"
+        networks:
+            - elastic
+    stats-server:
+        build: "./"
+        ports:
+            - "3001:3001"
+        networks:
+            - elastic
+
+
+networks:
+    elastic:
