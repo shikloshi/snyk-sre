@@ -24,7 +24,7 @@ The next thing would be to use `bin/blast` (add the link here) inside snyk proje
 * `ELASTIC_METRIC_INDEX` - ES index to send eventss to. Default to `event-loop-metric`
 
 
-### Solution considurations
+### Solution considerations
 -----
 
 Choosing elasticsearch due to it's over-time abilities, my prior knowledge with it and a really easy way to visualize data through Kibana. 
