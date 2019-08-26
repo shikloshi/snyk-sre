@@ -83,11 +83,11 @@ This is for all blocking events, you can easily filter this using "Group by: Fil
 Example:
 ![example](images/filter.png)
 
-#### Place for improvment:
+#### Fixes / Improvments:
 
 - [ ] Send to ES bulk of events (using count of events + deadline for send).
 
-- [ ] Add the ability to identify JS library code (to answer 2).
+- [ ] Add the ability to identify JS library code (to answer 2). Currently we are only identifying that this is not a `node_modules`.  
 
 - [ ] Metric for our service, maybe run it with Nsolid :)
 - [ ] Adding raw ES query DSL
