@@ -31,9 +31,46 @@ Choosing elasticsearch due to it's over-time abilities, my prior knowledge with 
 
 The simple setup (sure, there is only one node and in the real-world production ready case there should be much more work done around it) and the prior knowledge that this should be suffice to answer the wanted questions, and in over all this could make observability really nice and easy for any software eng to reason about.
 
+Document example:
+
+```json
+{
+  "_index": "event-loop-metrics",
+  "_type": "_doc",
+  "_id": "BGU9zWwBux_JJ2JxW57j",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "time": "2019-08-26T09:24:06.217Z",
+    "event": "nsolid-process-blocked",
+    "app": "sample-app",
+    "appVersion": "1.0.0",
+    "hostname": "AviadS-MBP.local",
+    "column": 30,
+    "lineNumber": 33,
+    "functionName": "setImmediate",
+    "userCode": true,
+    "file": "/Users/aviad.shikloshi/projects/snyk/sre-exercise-sample-app/index.js",
+    "blockCodeId": "setImmediate:33:30",
+    "blockedFor": 832,
+    "stack": "    at setImmediate (/Users/aviad.shikloshi/projects/snyk/sre-exercise-sample-app/index.js:33:30)\n    at runCallback (timers.js:818:20)\n    at tryOnImmediate (timers.js:776:5)\n    at processImmediate (timers.js:753:5)"
+  },
+  "fields": {
+    "time": [
+      "2019-08-26T09:24:06.217Z"
+    ]
+  },
+  "sort": [
+    1566811446217
+  ]
+}
+```
+
 ### Visualization
 
 1. Identify the wost blocking code:
+
+![worst blocking](images/worst_blocking.png)
 
 ```http://localhost:5601/app/kibana#/visualize/create?type=metric&indexPattern=6099a170-c746-11e9-845a-2745f940fbda&_g=()&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(field:blockedFor),schema:metric,type:max),(enabled:!t,id:'2',params:(field:blockCodeId,missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:1),schema:group,type:terms)),params:(addLegend:!f,addTooltip:!t,dimensions:(bucket:(accessor:0,format:(id:terms,params:(id:string,missingBucketLabel:Missing,otherBucketLabel:Other)),type:vis_dimension),metrics:!((accessor:1,format:(id:number,params:()),type:vis_dimension))),metric:(colorSchema:'Green+to+Red',colorsRange:!((from:0,to:10000,type:range)),invertColors:!f,labels:(show:!t),metricColorMode:None,percentageMode:!f,style:(bgColor:!f,bgFill:%23000,fontSize:60,labelColor:!f,subText:''),useRanges:!f),type:metric),title:'',type:metric))```
 
@@ -44,7 +81,7 @@ The simple setup (sure, there is only one node and in the real-world production 
 This is for all blocking events, you can easily filter this using "Group by: Filter" with the KQL query string being, for example:  `blockCodeId : "waitAround:3:3" `
 
 Example:
-()
+![example](images/filter.png)
 
 #### Place for improvment:
 
