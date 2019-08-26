@@ -19,9 +19,9 @@ The next thing would be to use `bin/blast` (add the link here) inside snyk proje
 
 ##### Environment Variables Configuration
  
-    * `PORT` - metric-service server listen port, this should be set on NSolid. default: `3001`
-    * `ELASTIC_ENDPOINT` - the endpoint for elasticsearch node. Default to `http://elasticsearch:9200`
-    * `ELASTIC_METRIC_INDEX` - ES index to send eventss to. Default to `event-loop-metric`
+* `PORT` - metric-service server listen port, this should be set on NSolid. default: `3001`
+* `ELASTIC_ENDPOINT` - the endpoint for elasticsearch node. Default to `http://elasticsearch:9200`
+* `ELASTIC_METRIC_INDEX` - ES index to send eventss to. Default to `event-loop-metric`
 
 
 ### Solution considurations
