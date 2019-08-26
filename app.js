@@ -41,6 +41,10 @@ async function initElastic() {
 	}, { ignore: [400] });
 }
 
+app.get('/health', (req, res) => {
+	res.sendStatus(200);
+});
+
 app.post('/eventloop', async (req, res) => {
 	const stats = req.body;
 
